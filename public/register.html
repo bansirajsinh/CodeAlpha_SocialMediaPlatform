@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Social Media Platform — Register a new account.">
+  <title>Nebula — Register</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: var(--bg-app);
+      padding: var(--space-6) var(--space-4);
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glass-panel auth-card animate-fade-in-up">
+    <div class="text-center mb-4">
+      <div class="logo-container justify-content-center pb-2">
+        <i class="bi bi-hexagon-fill"></i>
+        <span>Nebula</span>
+      </div>
+      <h2 class="mt-2 font-weight-bold">Create Account</h2>
+      <p class="text-muted">Join our community and connect with people worldwide</p>
+    </div>
+
+    <form id="register-form">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="firstName" class="form-label">First Name</label>
+          <input type="text" class="form-control border-color" id="firstName" required placeholder="John">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" class="form-control border-color" id="lastName" required placeholder="Doe">
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="username" class="form-label">Username</label>
+        <div class="input-group">
+          <span class="input-group-text bg-transparent border-end-0 border-color"><i class="bi bi-at text-muted"></i></span>
+          <input type="text" class="form-control border-start-0 border-color" id="username" required placeholder="johndoe">
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <div class="input-group">
+          <span class="input-group-text bg-transparent border-end-0 border-color"><i class="bi bi-envelope text-muted"></i></span>
+          <input type="email" class="form-control border-start-0 border-color" id="email" required placeholder="john@example.com">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control border-color" id="password" required placeholder="••••••••">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control border-color" id="confirmPassword" required placeholder="••••••••">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 py-3 font-weight-bold mb-3 mt-2" id="submit-btn">
+        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true" style="display: none;" id="btn-spinner"></span>
+        Get Started
+      </button>
+
+      <div class="text-center mt-3">
+        <span class="text-muted">Already have an account?</span>
+        <a href="login.html" class="font-weight-semibold ms-1">Sign In</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- App Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    // Redirect if already logged in
+    if (auth.isAuthenticated()) {
+      window.location.href = '/index.html';
+    }
+
+    const form = document.getElementById('register-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnSpinner = document.getElementById('btn-spinner');
+
+    // Helper to display input validation errors inline
+    function showInputErrors(errors) {
+      document.querySelectorAll('.invalid-feedback').forEach(el => el.remove());
+      document.querySelectorAll('.form-control').forEach(el => el.classList.remove('is-invalid'));
+
+      errors.forEach(err => {
+        const input = document.getElementById(err.field);
+        if (input) {
+          input.classList.add('is-invalid');
+          const feedback = document.createElement('div');
+          feedback.className = 'invalid-feedback d-block mt-1';
+          feedback.innerText = err.message;
+          const parent = input.closest('.input-group') || input.closest('.form-group') || input.parentElement;
+          parent.appendChild(feedback);
+        } else {
+          utils.showToast(err.message, 'error');
+        }
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const first_name = document.getElementById('firstName').value.trim();
+      const last_name = document.getElementById('lastName').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Basic client-side checks
+      const localErrors = [];
+      if (!first_name) {
+        localErrors.push({ field: 'firstName', message: 'First name is required' });
+      }
+      if (!last_name) {
+        localErrors.push({ field: 'lastName', message: 'Last name is required' });
+      }
+      if (!username) {
+        localErrors.push({ field: 'username', message: 'Username is required' });
+      }
+      if (!email) {
+        localErrors.push({ field: 'email', message: 'Email address is required' });
+      }
+      if (!password) {
+        localErrors.push({ field: 'password', message: 'Password is required' });
+      }
+      if (password !== confirmPassword) {
+        localErrors.push({ field: 'confirmPassword', message: 'Passwords do not match' });
+      }
+      if (password && password.length < 6) {
+        localErrors.push({ field: 'password', message: 'Password must be at least 6 characters' });
+      }
+
+      if (localErrors.length > 0) {
+        showInputErrors(localErrors);
+        return;
+      }
+
+      submitBtn.disabled = true;
+      btnSpinner.style.display = 'inline-block';
+
+      try {
+        await auth.register({
+          username,
+          email,
+          password,
+          first_name,
+          last_name
+        });
+      } catch (err) {
+        submitBtn.disabled = false;
+        btnSpinner.style.display = 'none';
+        if (err.details && err.details.errors) {
+          showInputErrors(err.details.errors);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

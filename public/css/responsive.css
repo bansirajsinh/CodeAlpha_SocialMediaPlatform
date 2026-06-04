@@ -1,0 +1,137 @@
+/* =====================================================
+ * RESPONSIVE STYLES — Mobile-First Breakpoints
+ * =====================================================
+ * 
+ * File: public/css/responsive.css
+ * Purpose: Media queries for responsive layout across
+ *          mobile, tablet, and desktop viewports.
+ * 
+ * ===================================================== */
+
+/* =====================================================
+ * TABLET — Medium screens (576px — 991px)
+ * ===================================================== */
+@media (max-width: 991.98px) {
+  .app-layout {
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-2);
+  }
+
+  .app-aside {
+    display: none; /* Hide recommendations on tablet/mobile */
+  }
+
+  /* Collapse sidebar to icons only */
+  .logo-container span,
+  .nav-link span,
+  .sidebar-footer .user-snippet-details,
+  .theme-switch-container span {
+    display: none;
+  }
+
+  .logo-container {
+    justify-content: center;
+    padding: 0 0 var(--space-4) 0;
+  }
+
+  .nav-link {
+    justify-content: center;
+    padding: var(--space-3);
+  }
+
+  .sidebar-footer {
+    align-items: center;
+  }
+
+  .theme-switch-container {
+    justify-content: center;
+    padding: var(--space-2);
+    background: transparent;
+  }
+}
+
+/* =====================================================
+ * MOBILE — Small screens (< 576px)
+ * ===================================================== */
+@media (max-width: 575.98px) {
+  body {
+    padding-bottom: 70px; /* Space for bottom navigation */
+  }
+
+  .app-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-2);
+  }
+
+  /* Hide normal sidebar on mobile, show bottom navigation instead */
+  .app-sidebar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-top: 1px solid var(--border-color);
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    z-index: var(--z-fixed);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .logo-container,
+  .sidebar-footer {
+    display: none; /* Hide logo and user avatar footer in bottom nav */
+  }
+
+  .nav-menu {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    gap: 0;
+  }
+
+  .nav-link {
+    color: var(--text-secondary);
+    padding: var(--space-2);
+  }
+
+  .nav-link:hover {
+    background: transparent;
+    transform: none;
+  }
+
+  .nav-link.active {
+    background: transparent;
+    color: var(--color-primary);
+  }
+
+  /* Post Composer adjustments */
+  .composer-card {
+    padding: var(--space-3);
+  }
+
+  /* Chat Box layout for mobile */
+  .chat-layout {
+    grid-template-columns: 1fr;
+    height: calc(100vh - 140px);
+  }
+  .chat-inbox {
+    display: flex;
+  }
+  .chat-inbox.hidden-mobile {
+    display: none;
+  }
+  .chat-main {
+    display: none;
+  }
+  .chat-main.active-mobile {
+    display: flex;
+  }
+}

@@ -1,0 +1,129 @@
+/* =====================================================
+ * CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+ * =====================================================
+ * 
+ * File: public/css/variables.css
+ * Purpose: Centralizes all design tokens — colors,
+ *          spacing, typography, shadows, etc.
+ *          All other CSS files reference these variables.
+ * 
+ * ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* --- Typography --- */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-headings: 'Sora', var(--font-family);
+  
+  /* --- Spacing Scale --- */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+
+  /* --- Border Radius --- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 2rem;
+  --radius-full: 9999px;
+
+  /* --- Transitions --- */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* --- Layout --- */
+  --max-width: 1250px;
+  --sidebar-width: 260px;
+  --content-width: 630px;
+  --aside-width: 320px;
+
+  /* ==========================================
+   * LIGHT THEME VARIABLES (DEFAULT)
+   * ========================================== */
+  --bg-app: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  --bg-primary: rgba(255, 255, 255, 0.75);
+  --bg-secondary: rgba(243, 246, 251, 0.85);
+  --bg-tertiary: #e9ecf4;
+  
+  --border-color: rgba(226, 232, 240, 0.8);
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-blur: blur(12px);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+
+  /* --- Brand & Accent Colors --- */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: rgba(59, 130, 246, 0.1);
+  --color-secondary: #8b5cf6;
+  --color-secondary-hover: #6d28d9;
+  --color-accent: #ec4899;
+  --color-accent-light: rgba(236, 72, 153, 0.1);
+  
+  /* --- Text Colors --- */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
+  --text-link: #3b82f6;
+
+  /* --- Semantic Colors --- */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #0ea5e9;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 2px 8px rgba(148, 163, 184, 0.08);
+  --shadow-md: 0 8px 24px rgba(148, 163, 184, 0.15);
+  --shadow-lg: 0 16px 40px rgba(148, 163, 184, 0.22);
+}
+
+/* ==========================================
+ * DARK THEME VARIABLES
+ * ========================================== */
+html[data-theme="dark"] {
+  --bg-app: linear-gradient(135deg, #0b0f19 0%, #111827 100%);
+  --bg-primary: rgba(17, 24, 39, 0.7);
+  --bg-secondary: rgba(31, 41, 55, 0.8);
+  --bg-tertiary: #374151;
+  
+  --border-color: rgba(55, 65, 81, 0.5);
+  --glass-bg: rgba(17, 24, 39, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(16px);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  /* --- Brand & Accent Colors --- */
+  --color-primary: #60a5fa;
+  --color-primary-hover: #3b82f6;
+  --color-primary-light: rgba(96, 165, 250, 0.15);
+  --color-secondary: #a78bfa;
+  --color-secondary-hover: #8b5cf6;
+  --color-accent: #f472b6;
+  --color-accent-light: rgba(244, 114, 182, 0.15);
+  
+  /* --- Text Colors --- */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-link: #60a5fa;
+
+  /* --- Semantic Colors --- */
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+  --color-info: #38bdf8;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+}

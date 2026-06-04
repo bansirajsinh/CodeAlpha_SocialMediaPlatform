@@ -1,0 +1,37 @@
+# =====================================================
+# SOCIAL MEDIA PLATFORM — GIT IGNORE
+# =====================================================
+
+# --- Dependencies ---
+node_modules/
+
+# --- Environment files (contains secrets) ---
+.env
+
+# --- Uploaded user content ---
+public/assets/uploads/*
+!public/assets/uploads/.gitkeep
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+
+# --- OS generated files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Build artifacts ---
+dist/
+build/
+
+# --- Coverage reports ---
+coverage/
